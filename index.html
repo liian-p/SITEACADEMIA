@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STILLUS PRIME | High Performance Center</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600;800&family=Teko:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div id="app-loader">
+        <h1 style="letter-spacing: 5px; font-size: 2rem; color:white">STILLUS <span class="text-primary">PRIME</span></h1>
+        <div class="loader-bar"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">STILLUS <span>PRIME</span></div>
+        <div class="nav-menu" id="navMenu">
+            <a class="nav-link" onclick="router.navigate('home')">Início</a>
+            <a class="nav-link" onclick="router.navigate('schedule')">Horários</a>
+            <a class="nav-link" onclick="modal.open('plansModal')">Planos</a>
+            <a class="nav-link" onclick="router.navigate('dashboard')">Área do Aluno</a>
+        </div>
+        <button class="btn-cta" id="loginBtn" onclick="auth.check()">LOGIN</button>
+    </nav>
+
+    <section id="view-home" class="page-view active">
+        <div class="hero-section">
+            <div class="hero-bg-shape"></div>
+            <div class="hero-content">
+                <span class="hero-tag">NEXT LEVEL FITNESS</span>
+                <h1 class="hero-title">TRANSFORME<br>SEU <span class="text-gradient">CORPO</span><br><span class="text-primary">AGORA.</span></h1>
+                <p class="hero-desc">A metodologia Stillus combina tecnologia, Cross Training e Musculação de alta performance em um ambiente desenhado para você superar limites.</p>
+                
+                <button class="btn-cta" onclick="modal.open('bookingModal')">AGENDAR EXPERIÊNCIA</button>
+
+                <div class="stats-grid">
+                    <div class="stat-item"><h3>1.2k+</h3><p>Alunos Ativos</p></div>
+                    <div class="stat-item"><h3>45</h3><p>Treinadores Elite</p></div>
+                    <div class="stat-item"><h3>24h</h3><p>Acesso Total</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-section">
+            <h2 style="text-align: center; margin-bottom: 60px;">NOSSAS MODALIDADES</h2>
+            <div class="grid-cards">
+                <div class="card" onclick="modal.openDetails('Musculação', 'Equipamentos Technogym de última geração com biometria integrada e acompanhamento em tempo real.')">
+                    <i class="fas fa-dumbbell card-icon"></i>
+                    <h3>Musculação</h3>
+                    <p class="text-muted">Equipamentos biomecânicos de última geração.</p>
+                </div>
+                <div class="card" onclick="modal.openDetails('CrossFit', 'Box oficial afiliado com estrutura completa, LPO, Gymnastics e treinos de alta intensidade WOD.')">
+                    <i class="fas fa-fire card-icon"></i>
+                    <h3>CrossFit</h3>
+                    <p class="text-muted">Box oficial com metodologia de alta intensidade.</p>
+                </div>
+                <div class="card" onclick="modal.openDetails('Spinning', 'Sala imersiva com sistema de som e luzes sincronizadas, simulando percursos reais em telão 4k.')">
+                    <i class="fas fa-biking card-icon"></i>
+                    <h3>Spinning</h3>
+                    <p class="text-muted">Sala imersiva com projeção de percursos.</p>
+                </div>
+                <div class="card" onclick="modal.openDetails('Personal', 'Atendimento 1:1 focado nos seus objetivos específicos com avaliação física por bioimpedância.')">
+                    <i class="fas fa-user-astronaut card-icon"></i>
+                    <h3>Personal</h3>
+                    <p class="text-muted">Acompanhamento exclusivo 1 a 1.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="view-dashboard" class="page-view">
+        <div class="dashboard-header">
+            <div class="user-welcome">
+                <p class="text-primary" style="margin-bottom:0; font-weight:bold;">BEM-VINDO DE VOLTA</p>
+                <h2 id="userNameDisplay">Visitante</h2>
+            </div>
+            <div class="user-plan-badge" id="userPlanDisplay">Free Pass</div>
+        </div>
+
+        <div class="dash-content">
+            <div class="dash-panel">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                    <h3>MEUS TREINOS</h3>
+                    <button class="btn-cta" style="font-size:0.8rem; padding:8px 20px;" onclick="modal.open('newWorkoutModal')">+ NOVO</button>
+                </div>
+                <div id="workoutsContainer" class="workout-list">
+                    <p class="text-muted">Nenhum treino registrado. Crie um novo!</p>
+                </div>
+            </div>
+
+            <div class="dash-panel">
+                <h3>PRÓXIMAS AULAS</h3>
+                <div id="nextClassesContainer" style="margin-top:20px;">
+                    </div>
+                <hr style="border:0; border-top:1px solid #333; margin:20px 0;">
+                <div style="text-align:center;">
+                    <h1 class="text-primary">85%</h1>
+                    <p class="text-muted">Frequência Mensal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="view-schedule" class="page-view">
+        <div style="padding: 100px 5% 40px;">
+            <h2 style="font-size:3rem;">GRADE <span class="text-primary">SEMANAL</span></h2>
+            <p class="text-muted">Clique em uma aula para reservar seu lugar.</p>
+        </div>
+        <div class="schedule-grid" id="scheduleGrid">
+            </div>
+    </section>
+
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="modal-close" onclick="modal.close('loginModal')">&times;</span>
+            <h2 class="text-primary">ACESSO MEMBRO</h2>
+            <div class="form-group">
+                <label class="form-label">E-MAIL</label>
+                <input type="email" class="form-input" id="inputEmail" placeholder="seu@email.com">
+            </div>
+            <div class="form-group">
+                <label class="form-label">SENHA</label>
+                <input type="password" class="form-input" placeholder="••••••">
+            </div>
+            <button class="btn-cta" style="width:100%" onclick="auth.login()">ENTRAR</button>
+            <p style="margin-top:15px; font-size:0.9rem; color:#666; text-align:center; cursor:pointer;" onclick="auth.demoLogin()">
+                [ Usar Conta Demo Admin ]
+            </p>
+        </div>
+    </div>
+
+    <div id="detailsModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="modal-close" onclick="modal.close('detailsModal')">&times;</span>
+            <h2 id="detailTitle" class="text-primary">TÍTULO</h2>
+            <p id="detailText" class="text-muted" style="font-size:1.1rem; margin-bottom:30px;">Texto descritivo.</p>
+            <button class="btn-cta" onclick="modal.close('detailsModal'); modal.open('bookingModal')">TENHO INTERESSE</button>
+        </div>
+    </div>
+
+    <div id="bookingModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="modal-close" onclick="modal.close('bookingModal')">&times;</span>
+            <h2>AGENDAR <span class="text-primary">AULA</span></h2>
+            <div class="form-group">
+                <label class="form-label">MODALIDADE</label>
+                <select class="form-input" id="bookClass">
+                    <option>CrossFit (WOD)</option>
+                    <option>Musculação</option>
+                    <option>Spinning</option>
+                    <option>Pilates</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">DATA</label>
+                <input type="date" class="form-input" id="bookDate">
+            </div>
+            <button class="btn-cta" style="width:100%" onclick="app.bookClass()">CONFIRMAR RESERVA</button>
+        </div>
+    </div>
+
+    <div id="newWorkoutModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="modal-close" onclick="modal.close('newWorkoutModal')">&times;</span>
+            <h2>NOVO <span class="text-primary">TREINO</span></h2>
+            <div class="form-group">
+                <label class="form-label">NOME DO TREINO</label>
+                <input type="text" class="form-input" id="workoutName" placeholder="Ex: Peito e Tríceps A">
+            </div>
+            <div class="form-group">
+                <label class="form-label">DESCRIÇÃO RÁPIDA</label>
+                <input type="text" class="form-input" id="workoutDesc" placeholder="Ex: Foco em força, 4x10">
+            </div>
+            <button class="btn-cta" style="width:100%" onclick="app.saveWorkout()">SALVAR</button>
+        </div>
+    </div>
+
+    <div id="plansModal" class="modal-overlay">
+        <div class="modal-box" style="text-align:center; max-width:800px;">
+            <span class="modal-close" onclick="modal.close('plansModal')">&times;</span>
+            <h2>ESCOLHA SEU <span class="text-primary">PLANO</span></h2>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px; margin-top:30px;">
+                <div style="background:#111; padding:20px; border:1px solid #333;">
+                    <h3>STANDARD</h3>
+                    <h1 style="color:#fff;">R$ 89<small>.90</small></h1>
+                    <p class="text-muted">Acesso Musculação</p>
+                    <button class="btn-cta" style="margin-top:10px; font-size:14px;" onclick="app.toast('Plano selecionado!')">ASSINAR</button>
+                </div>
+                <div style="background:#1E1E1E; padding:20px; border:1px solid var(--primary); transform:scale(1.05);">
+                    <h3 class="text-primary">PRIME</h3>
+                    <h1 style="color:#fff;">R$ 129<small>.90</small></h1>
+                    <p class="text-muted">Acesso Total + Aulas</p>
+                    <button class="btn-cta" style="margin-top:10px; font-size:14px;" onclick="app.toast('Melhor escolha! Redirecionando...')">ASSINAR</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle text-primary" style="font-size:1.5rem;"></i>
+        <div>
+            <h4 style="margin:0; font-size:1rem;">SUCESSO</h4>
+            <p id="toastMsg" style="margin:0; font-size:0.8rem; color:#aaa;">Operação realizada.</p>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js" defer></script>
+</body>
+</html>
